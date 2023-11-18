@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import ContactForm from "./views/ContactForm.jsx";
+import ContactList from "./views/ContactList.jsx";
+import EditContactForm from "./views/EditContactForm.jsx"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import injectContext from "./store/context.js";
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<ContactList />} />
+          <Route path="/list" element={<ContactList />} />
+          <Route path="/addcontact/" element={<ContactForm />} />
+          <Route path="/editcontact/:contactID" element={<EditContactForm/>}/>
+          <Route render={() => <h1>Not found!</h1>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
 
-export default App;
+export default injectContext(App);
