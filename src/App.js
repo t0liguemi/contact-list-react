@@ -1,7 +1,6 @@
 import "./App.css";
 import ContactForm from "./views/ContactForm.jsx";
 import ContactList from "./views/ContactList.jsx";
-import EditContactForm from "./views/EditContactForm.jsx"
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import injectContext from "./store/context.js";
 
@@ -13,8 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ContactList />} />
           <Route path="/list" element={<ContactList />} />
-          <Route path="/addcontact/" element={<ContactForm />} />
-          <Route path="/editcontact/:contactID" element={<EditContactForm/>}/>
+          <Route path="/addcontact/:contactID" element={<ContactForm />} />
           <Route render={() => <h1>Not found!</h1>} />
         </Routes>
       </BrowserRouter>

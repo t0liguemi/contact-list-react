@@ -8,15 +8,22 @@ import {
   AiFillMail,
 } from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
-import { MdOutlineArrowOutward } from "react-icons/md";
 
 function ContactList() {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
   const emptyList = () => {
     if (store.contacts.length === 0) {
-      return <li key="noItems" className="list-group-item d-flex p-4"><button className="btn btn-secondary" onClick={() => navigate("/addcontact/0")}>No contacts yet, click here to start.</button></li>;
-      <></>;
+      return (
+        <li key="noItems" className="list-group-item d-flex p-4">
+          <button
+            className="btn btn-secondary"
+            onClick={() => navigate("/addcontact/0")}
+          >
+            No contacts yet, click here to start.
+          </button>
+        </li>
+      );
     }
   };
   return (
@@ -40,7 +47,10 @@ function ContactList() {
                   <div className="flex-shrink-0 mx-5 ratio ratio-1x1 w-75">
                     <img
                       className="img-fluid object-fit-cover rounded-circle"
-                      src={"https://source.unsplash.com/random/300x200?sig="+Math.random()}
+                      src={
+                        "https://source.unsplash.com/random/300x200?sig=" +
+                        Math.random()
+                      }
                       alt="person profile photo"
                     />
                   </div>
@@ -80,14 +90,18 @@ function ContactList() {
               <div className="d-flex flex-row-reverse me-5 align-items-start">
                 <button
                   className="fs-3 bg-transparent border-0"
-                  onClick={() => actions.deleteContact(item.id)}
+                  onClick={() => {
+                    if (window.confirm("Do you really want to delete "+item.full_name+"?")) {
+                      actions.deleteContact(item.id);
+                    }
+                  }}
                 >
                   <AiFillDelete className="pe-none mx-3" />
                 </button>
                 <button
                   className="fs-3 bg-transparent border-0"
                   id={"Edit " + item.full_name}
-                  onClick={() => navigate("/addcontact/"+item.id)}
+                  onClick={() => navigate("/addcontact/" + item.id)}
                 >
                   <AiFillEdit className="mx-3" />
                 </button>
