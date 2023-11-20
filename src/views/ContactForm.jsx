@@ -16,16 +16,18 @@ function ContactForm() {
     <div>
       <div className="container my-5">
         <div className="d-flex justify-content-center">
-          <h1>Add a new contact</h1>
+          <h1>{modeEdit==true?"Editing existing contact: "+existingUser.full_name:"Add a new contact"}</h1>
         </div>
         <form
           id="contactForm"
           onSubmit={(event) => {
-            if (modeEdit==true){
-              actions.editContact(existingUser.id,event);navigate("/list")
-            }else{
-            actions.createContact(event);
-            navigate("/list")}
+            if (modeEdit == true) {
+              actions.editContact(existingUser.id, event);
+              navigate("/list");
+            } else {
+              actions.createContact(event);
+              navigate("/list");
+            }
           }}
         >
           <div className="mb-3">
